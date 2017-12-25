@@ -1,0 +1,22 @@
+#  Write a program to prompt the user for hours and rate per hour using input to compute gross pay. Pay the hourly rate for the hours up to 40 and 1.5 times the hourly rate for all hours worked above 40 hours. Use 45 hours and a rate of 10.50 per hour to test the program (the pay should be 498.75). You should use input to read a string and float() to convert the string to a number. Do not worry about error checking the user input - assume the user types numbers properly.
+
+# get user input
+hrs = input("Enter Hours:")
+rate = input("Enter Rate:")
+
+# convert input to floatin decimals
+h = float(hrs)
+r = float(rate)
+
+# check if under 40 hours
+if h <= 40:
+    pay = h * r
+# check if over 40 hours
+elif h > 40:
+    pay = 40 * r
+    ot_rate = 1.5 * r
+    ot_hrs = h - 40
+    ot_pay = ot_rate * ot_hrs
+    pay = pay + ot_pay
+# print final pay
+print(pay)
