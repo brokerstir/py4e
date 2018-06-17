@@ -1,4 +1,4 @@
-Using * and zip to 'unzip'
+# Using * and zip to 'unzip'
 # Create a zip object from mutants and powers: z1
 z1 = zip(mutants, powers)
 
