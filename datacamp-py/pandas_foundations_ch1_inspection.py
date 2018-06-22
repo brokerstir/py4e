@@ -42,3 +42,55 @@ list_labels = ['year', 'artist', 'song', 'chart weeks']
 
 # Assign the list of labels to the columns attribute: df.columns
 df.columns = list_labels
+
+
+'''
+Building DataFrames with broadcasting
+You can implicitly use 'broadcasting', a feature of NumPy, when creating pandas DataFrames. In this exercise, you're going to create a DataFrame of cities in Pennsylvania that contains the city name in one column and the state name in the second. We have imported the names of 15 cities as the list cities.
+Your job is construct a DataFrame from the list of cities and the string 'PA'.
+'''
+
+'''
+Make a string object with the value 'PA' and assign it to state.
+Construct a dictionary with 2 key:value pairs: 'state':state and 'city':cities.
+Construct a pandas DataFrame from the dictionary you created and assign it to df.
+'''
+
+# Make a string with the value 'PA': state
+state = 'PA'
+
+# Construct a dictionary: data
+data = {'state':state, 'city':cities}
+
+# Construct a DataFrame from dictionary data: df
+df = pd.DataFrame(data)
+
+# Print the DataFrame
+print(df)
+
+
+'''
+The next step is to reread the same file, but simultaneously rename the columns using the names keyword input parameter, set equal to a list of new column labels. You will also need to set header=0 to rename the column labels.
+Finish up by inspecting the result with df.head() and df.info() in the IPython Shell. 
+pandas has already been imported and is available in the workspace as pd.
+'''
+
+'''
+Use pd.read_csv() with the string 'world_population.csv' to read the CSV file into a DataFrame and assign it to df1.
+Create a list of new column labels - 'year', 'population' - and assign it to the variable new_labels.
+Reread the same file, again using pd.read_csv(), but this time, add the keyword arguments header=0 and names=new_labels. Assign the resulting DataFrame to df2.
+Print both the df1 and df2 DataFrames to see the change in column names. This has already been done for you.
+'''
+
+# Read in the file: df1
+df1 = pd.read_csv('world_population.csv')
+
+# Create a list of the new column labels: new_labels
+new_labels = ['year', 'population']
+
+# Read in the file, specifying the header and names parameters: df2
+df2 = pd.read_csv('world_population.csv', header=0, names=new_labels)
+
+# Print both the DataFrames
+print(df1)
+print(df2)
