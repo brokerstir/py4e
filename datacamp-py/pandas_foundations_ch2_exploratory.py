@@ -163,3 +163,108 @@ df.fare.plot(kind='box')
 
 # Show the plot
 plt.show()
+
+'''
+Quantiles
+In this exercise, you'll investigate the probabilities of life expectancy in countries around the world. This dataset contains life expectancy for persons born each year from 1800 to 2015. Since country names change or results are not reported, not every country has values. This dataset was obtained from Gapminder.
+First, you will determine the number of countries reported in 2015. There are a total of 206 unique countries in the entire dataset. Then, you will compute the 5th and 95th percentiles of life expectancy over the entire dataset. Finally, you will make a box plot of life expectancy every 50 years from 1800 to 2000. Notice the large change in the distributions over this period.
+The dataset has been pre-loaded into a DataFrame called df.
+'''
+
+'''Print the number of countries reported in 2015. To do this, use the .count() method on the '2015' column of df.
+Print the 5th and 95th percentiles of df. To do this, use the .quantile() method with the list [0.05, 0.95].
+Generate a box plot using the list of columns provided in years. This has already been done for you, so click on 'Submit Answer' to view the result!
+'''
+
+# Print the number of countries reported in 2015
+print(df['2015'].count())
+
+# Print the 5th and 95th percentiles
+print(df.quantile([0.05, 0.95]))
+
+# Generate a box plot
+years = ['1800','1850','1900','1950','2000']
+df[years].plot(kind='box')
+plt.show()
+
+
+'''
+Standard deviation of temperature
+Let's use the mean and standard deviation to explore differences in temperature distributions in Pittsburgh in 2013. The data has been obtained from Weather Underground.
+In this exercise, you're going to compare the distribution of daily temperatures in January and March. You'll compute the mean and standard deviation for these two months. You will notice that while the mean values are similar, the standard deviations are quite different, meaning that one month had a larger fluctuation in temperature than the other.
+The DataFrames have been pre-loaded for you as january, which contains the January data, and march, which contains the March data.
+'''
+
+'''
+Compute and print the means of the January and March data using the .mean() method.
+Compute and print the standard deviations of the January and March data using the .std() method.
+'''
+
+# Print the mean of the January and March data
+print(january.mean(), march.mean())
+
+# Print the standard deviation of the January and March data
+print(january.std(), march.std())
+
+
+'''
+Separate and summarize
+Let's use population filtering to determine how the automobiles in the US differ from the global average and standard deviation. How the distribution of fuel efficiency (MPG) for the US differ from the global average and standard deviation?
+In this exercise, you'll compute the means and standard deviations of all columns in the full automobile dataset. Next, you'll compute the same quantities for just the US population and subtract the global values from the US values.
+All necessary modules have been imported and the DataFrame has been pre-loaded as df.
+'''
+
+'''
+Compute the global mean and global standard deviations of df using the .mean() and .std() methods. Assign the results to global_mean and global_std.
+Filter the 'US' population from the 'origin' column and assign the result to us.
+Compute the US mean and US standard deviations of us using the .mean() and .std() methods. Assign the results to us_mean and us_std.
+Print the differences between us_mean and global_mean and us_std and global_std. This has already been done for you.
+'''
+
+# Compute the global mean and global standard deviation: global_mean, global_std
+global_mean = df.mean()
+global_std = df.std()
+
+# Filter the US population from the origin column: us
+us = df[df['origin'] == 'US']
+
+# Compute the US mean and US standard deviation: us_mean, us_std
+us_mean = us.mean()
+us_std = us.std()
+
+# Print the differences
+print(us_mean - global_mean)
+print(us_std - global_std)
+
+
+'''
+Separate and plot
+Population filtering can be used alongside plotting to quickly determine differences in distributions between the sub-populations. You'll work with the Titanic dataset.
+There were three passenger classes on the Titanic, and passengers in each class paid a different fare price. In this exercise, you'll investigate the differences in these fare prices.
+Your job is to use Boolean filtering and generate box plots of the fare prices for each of the three passenger classes. The fare prices are contained in the 'fare' column and passenger class information is contained in the 'pclass' column.
+When you're done, notice the portions of the box plots that differ and those that are similar.
+The DataFrame has been pre-loaded for you as titanic.
+'''
+
+'''
+Inside plt.subplots(), specify the nrows and ncols parameters so that there are 3 rows and 1 column.
+Filter the rows where the 'pclass' column has the values 1 and generate a box plot of the 'fare' column.
+Filter the rows where the 'pclass' column has the values 2 and generate a box plot of the 'fare' column.
+Filter the rows where the 'pclass' column has the values 3 and generate a box plot of the 'fare' column.
+'''
+
+# Display the box plots on 3 separate rows and 1 column
+fig, axes = plt.subplots(nrows=3, ncols=1)
+
+# Generate a box plot of the fare prices for the First passenger class
+titanic.loc[titanic['pclass'] == 1].plot(ax=axes[0], y='fare', kind='box')
+
+# Generate a box plot of the fare prices for the Second passenger class
+titanic.loc[titanic['pclass'] == 2].plot(ax=axes[1], y='fare', kind='box')
+
+# Generate a box plot of the fare prices for the Third passenger class
+titanic.loc[titanic['pclass'] == 3].plot(ax=axes[2], y='fare', kind='box')
+
+# Display the plot
+plt.show()
+
