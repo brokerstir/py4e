@@ -1,3 +1,15 @@
+'''
+Combining rows of data
+The dataset you'll be working with here relates to NYC Uber data. The original dataset has all the originating Uber pickup locations by time and latitude and longitude. For didactic purposes, you'll be working with a very small portion of the actual data.
+Three DataFrames have been pre-loaded: uber1, which contains data for April 2014, uber2, which contains data for May 2014, and uber3, which contains data for June 2014. Your job in this exercise is to concatenate these DataFrames together such that the resulting DataFrame has the data for all three months.
+Begin by exploring the structure of these three DataFrames in the IPython Shell using methods such as .head().
+
+oncatenate uber1, uber2, and uber3 together using pd.concat(). You'll have to pass the DataFrames in as a list.
+Print the shape and then the head of the concatenated DataFrame, row_concat.
+
+'''
+
+
 # Concatenate uber1, uber2, and uber3: row_concat
 row_concat = pd.concat([uber1,uber2,uber3])
 
@@ -7,8 +19,15 @@ print(row_concat.shape)
 # Print the head of row_concat
 print(row_concat.head())
 
+'''
+Combining columns of data
+Think of column-wise concatenation of data as stitching data together from the sides instead of the top and bottom. To perform this action, you use the same pd.concat() function, but this time with the keyword argument axis=1. The default, axis=0, is for a row-wise concatenation.
+You'll return to the Ebola dataset you worked with briefly in the last chapter. It has been pre-loaded into a DataFrame called ebola_melt. In this DataFrame, the status and country of a patient is contained in a single column. This column has been parsed into a new DataFrame, status_country, where there are separate columns for status and country. 
+Explore the ebola_melt and status_country DataFrames in the IPython Shell. Your job is to concatenate them column-wise in order to obtain a final, clean DataFrame.
 
-
+Concatenate ebola_melt and status_country column-wise into a single DataFrame called ebola_tidy. Be sure to specify axis=1 and to pass the two DataFrames in as a list.
+Print the shape and then the head of the concatenated DataFrame, ebola_tidy.
+'''
 
 # Concatenate ebola_melt and status_country column-wise: ebola_tidy
 ebola_tidy = pd.concat([ebola_melt,status_country], axis=1)

@@ -43,6 +43,20 @@ Melt the Ozone, Solar.R, Wind, and Temp columns of airquality into rows, with th
 Print the head of airquality_melt.
 '''
 
+
+
+'''
+Pivot data
+Pivoting data is the opposite of melting it. Remember the tidy form that the airquality DataFrame was in before you melted it? You'll now begin pivoting it back into that form using the .pivot_table() method!
+While melting takes a set of columns and turns it into a single column, pivoting will create a new column for each unique value in a specified column.
+.pivot_table() has an index parameter which you can use to specify the columns that you don't want pivoted: It is similar to the id_vars parameter of pd.melt(). Two other parameters that you have to specify are columns (the name of the column you want to pivot), and values (the values to be used when the column is pivoted). The melted DataFrame airquality_melt has been pre-loaded for you.
+'''
+'''
+Print the head of airquality_melt.
+Pivot airquality_melt by using .pivot_table() with the rows indexed by 'Month' and 'Day', the columns indexed by 'measurement', and the values populated with 'reading'.
+Print the head of airquality_pivot.
+'''
+
 # Print the head of airquality_melt
 print(airquality_melt.head())
 
@@ -52,7 +66,19 @@ airquality_pivot = airquality_melt.pivot_table(index=['Month', 'Day'], columns='
 # Print the head of airquality_pivot
 print(airquality_pivot.head())
 
-
+'''
+Resetting the index of a DataFrame
+After pivoting airquality_melt in the previous exercise, you didn't quite get back the original DataFrame.
+What you got back instead was a pandas DataFrame with a hierarchical index (also known as a MultiIndex).
+Hierarchical indexes are covered in depth in Manipulating DataFrames with pandas. In essence, they allow you to group columns or rows by another variable - in this case, by 'Month' as well as 'Day'. 
+There's a very simple method you can use to get back the original DataFrame from the pivoted DataFrame: .reset_index(). Dan didn't show you how to use this method in the video, but you're now going to practice using it in this exercise to get back the original DataFrame from airquality_pivot, which has been pre-loaded.
+'''
+'''
+Print the index of airquality_pivot by accessing its .index attribute. This has been done for you.
+Reset the index of airquality_pivot using its .reset_index() method.
+Print the new index of airquality_pivot.
+Print the head of airquality_pivot.
+'''
 
 # Print the index of airquality_pivot
 print(airquality_pivot.index)
@@ -67,6 +93,20 @@ print(airquality_pivot.index)
 print(airquality_pivot.head())
 
 
+'''
+Pivoting duplicate values
+So far, you've used the .pivot_table() method when there are multiple index values you want to hold constant during a pivot. In the video, Dan showed you how you can also use pivot tables to deal with duplicate values by providing an aggregation function through the aggfunc parameter. Here, you're going to combine both these uses of pivot tables.
+Let's say your data collection method accidentally duplicated your dataset. Such a dataset, in which each row is duplicated, has been pre-loaded as airquality_dup. In addition, the airquality_melt DataFrame from the previous exercise has been pre-loaded. Explore their shapes in the IPython Shell by accessing their .shape attributes to confirm the duplicate rows present in airquality_dup.
+You'll see that by using .pivot_table() and the aggfunc parameter, you can not only reshape your data, but also remove duplicates. Finally, you can then flatten the columns of the pivoted DataFrame using .reset_index().
+NumPy and pandas have been imported as np and pd respectively.
+'''
+
+'''
+Pivot airquality_dup by using .pivot_table() with the rows indexed by 'Month' and 'Day', the columns indexed by 'measurement', and the values populated with 'reading'. Use np.mean for the aggregation function. 
+Flatten airquality_pivot by resetting its index.
+Print the head of airquality_pivot and then the original airquality DataFrame to compare their structure.
+'''
+
 
 # Pivot airquality_dup: airquality_pivot
 airquality_pivot = airquality_dup.pivot_table(index=['Month', 'Day'], columns='measurement', values='reading', aggfunc=np.mean)
@@ -80,6 +120,23 @@ print(airquality_pivot.head())
 # Print the head of airquality
 print(airquality.head())
 
+
+
+
+
+'''
+Splitting a column with .str
+The dataset you saw in the video, consisting of case counts of tuberculosis by country, year, gender, and age group, has been pre-loaded into a DataFrame as tb.
+In this exercise, you're going to tidy the 'm014' column, which represents males aged 0-14 years of age. In order to parse this value, you need to extract the first letter into a new column for gender, and the rest into a column for age_group. Here, since you can parse values by position, you can take advantage of pandas' vectorized string slicing by using the str attribute of columns of type object.
+Begin by printing the columns of tb in the IPython Shell using its .columns attribute, and take note of the problematic column.
+'''
+
+'''
+Melt tb keeping 'country' and 'year' fixed.
+Create a 'gender' column by slicing the first letter of the variable column of tb_melt.
+Create an 'age_group' column by slicing the rest of the variable column of tb_melt.
+Print the head of tb_melt. This has been done for you, so hit 'Submit Answer' to see the results!
+'''
 
 
 # Melt tb: tb_melt
