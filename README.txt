@@ -1,1 +1,1 @@
-This contain python scripts that do lots of cool things.
+This repo has python scripts that do lots of cool things.
