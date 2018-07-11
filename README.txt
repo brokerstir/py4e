@@ -1,1 +1,1 @@
-This repo holds all my worked assignments from the course at https://www.py4e.com/
+This contain python scripts that do lots of cool things.
